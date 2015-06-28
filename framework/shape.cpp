@@ -1,12 +1,12 @@
 #include "shape.hpp"
 #include <iostream>
 
-shape::shape()
+Shape::Shape()
 {
 }
 
-shape::~shape()
+Shape::~Shape()
 {
-	std::cout << "c'tor shape" << endl;
+	std::cout << "c'tor shape" << std::endl;
 }
 
