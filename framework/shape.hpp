@@ -1,11 +1,16 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-#include <string>
-#include <iostream>
 
 class shape
 {
 	public:
 			shape();
-			virtual ~shape
+			virtual ~shape();
+
+			virtual float volume() const = 0;
+			virtual float area() const = 0;
+
 }
+
+
+#endif
