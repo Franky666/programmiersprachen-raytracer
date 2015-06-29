@@ -1,6 +1,9 @@
 #include "sphere.hpp"
 #include "shape.hpp"
 #include <cmath>
+#include "glm/ext.hpp"
+
+
 
 //Constructor
 Sphere::Sphere()
@@ -34,4 +37,10 @@ double Sphere::area() const
 	return 4.0 * M_PI * _r * _r * _r;
 }
 
+
+std::ostream& Sphere::print(std::ostream& os) const
+{
+    os << "[Sphere: " << _name << "]\n[Color: " << _color << "]\n[Point: " << glm::to_string(_mp) << "]\n[radius: " << _r << "]\n";
+    return os;
+}
 

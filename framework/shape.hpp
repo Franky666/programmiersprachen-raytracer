@@ -17,6 +17,8 @@ class Shape
 			Color color() const;
 			std::string name() const;
 
+			virtual std::ostream& print(std::ostream& os) const;
+
 	private:
 
 	protected:
@@ -25,5 +27,6 @@ class Shape
 
 };
 
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 
-#endif
+#endif 

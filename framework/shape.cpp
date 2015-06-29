@@ -21,4 +21,13 @@ std::string Shape::name() const
 	return _name;
 }
 
+std::ostream& Shape::print(std::ostream& os) const
+{
+	os << "Shape: [Name: " << _name << "] [Color: " << _color << "] \n ";
+	return os;
+}
 
+std::ostream& operator<<(std::ostream& os, Shape const& s)
+{
+	return s.print(os);
+}

@@ -1,5 +1,8 @@
 #include "box.hpp"
+#include "shape.hpp"
 #include <cmath>
+#include "glm/ext.hpp"
+
 
 //Constructor
 Box::Box()
@@ -38,4 +41,10 @@ double Box::area() const
 	glm::vec3 vec = _max - _min;
 
 	return 2 * fabs((vec.x * vec.y) + (vec.x * vec.z) + (vec.y * vec.z));
+}
+
+std::ostream& Box::print(std::ostream& os) const
+{
+	os << "[Box: " << _name <<"}\n[Color: " << _color << "]\n[Min; " << glm::to_string(_min) << "]\n[Max: " << glm::to_string(_max) << "]\n";
+	return os;
 }

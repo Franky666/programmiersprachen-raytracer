@@ -2,7 +2,9 @@
 #define BOX_HPP
 #include "shape.hpp"
 #include <glm/vec3.hpp>
-
+#include <string>
+#include <stdlib.h>
+#include "shape.hpp"
 
 class Box : public Shape
 {
@@ -19,6 +21,7 @@ class Box : public Shape
 	double volume() const override;
 	double area() const override;
 
+	std::ostream& print(std::ostream & os) const override;
 
 	private:
 		glm::vec3 _min;

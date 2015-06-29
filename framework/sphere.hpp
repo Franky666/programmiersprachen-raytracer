@@ -1,6 +1,8 @@
 #ifndef SPHERE_HPP
 #define SPHERE_HPP
 #include "shape.hpp"
+#include <string>
+#include <stdlib.h>
 #include <glm/vec3.hpp>
 
 class Sphere: public Shape
@@ -17,7 +19,8 @@ class Sphere: public Shape
 	double area() const override;
 	double volume() const override;
 
-
+    std::ostream& print(std::ostream& os) const override;
+    
 
 	private:
 		glm::vec3 _mp;
