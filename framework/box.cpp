@@ -20,12 +20,12 @@ Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Color col
 Box::~Box()
 {}
 
-glm::vec3 Box::min() const
+glm::vec3 const& Box::min() const
 {
 	return _min;
 }
 
-glm::vec3 Box::max() const
+glm::vec3 const& Box::max() const
 {
 	return _max; 
 }

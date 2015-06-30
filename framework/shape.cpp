@@ -6,17 +6,22 @@ Shape::Shape(): _name{"untitled"}, _color{1.0f, 1.0f, 1.0f}
 {
 }
 
+Shape::Shape(std::string const& name, Color const& color)
+: _name{name}, _color{color}
+{}
+
+
 Shape::~Shape()
 {
-	std::cout << "c'tor shape" << std::endl;
+	//std::cout << "c'tor shape" << std::endl;
 }
 
-Color Shape::color() const
+Color const& Shape::color() const
 {
 	return _color;
 }
 
-std::string Shape::name() const
+std::string const& Shape::name() const
 {
 	return _name;
 }

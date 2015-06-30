@@ -16,8 +16,8 @@ class Box : public Shape
         ~Box();
     
     
-        glm::vec3 min() const;
-        glm::vec3 max() const;
+        glm::vec3 const& min() const;
+        glm::vec3 const& max() const;
     
         double volume() const override;
         double area() const override;

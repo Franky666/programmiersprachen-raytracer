@@ -8,14 +8,14 @@ class Shape
 {
 	public:
 			Shape();
-			Shape(std::string name, Color const& color);
+			Shape(std::string const& name, Color const& color);
 			virtual ~Shape();
 
 			virtual double volume() const = 0;
 			virtual double area() const = 0;
 
-			Color color() const;
-			std::string name() const;
+			Color const& color() const;
+			std::string const& name() const;
 
 			virtual std::ostream& print(std::ostream& os) const;
 
