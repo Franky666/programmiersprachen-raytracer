@@ -17,16 +17,16 @@ TEST_CASE("Sphere","[Sphere]")
 	REQUIRE(s1.mp().y == 0);
 	REQUIRE(s1.mp().z == 0);
 
-	double r = 3;
+	double r = 4.2;
 	glm::vec3 v{3};
 	Sphere s2{v, r};
 
-	REQUIRE(s2.radius() == 3);
+	REQUIRE(s2.radius() == 4.2);
 	REQUIRE(s2.mp().x == 3);
 	REQUIRE(s2.mp().y == 3);
 	REQUIRE(s2.mp().z == 3);
-	REQUIRE(Approx(s2.volume()) == 113.097);
-	REQUIRE(Approx(s2.area()) == 113.097);
+	REQUIRE(Approx(s2.volume()) == 310.339);
+	REQUIRE(Approx(s2.area()) == 221.670);
 
 
 	Color red(255 , 0 , 0);
@@ -51,7 +51,7 @@ TEST_CASE("Box","[Box]")
 
 	glm::vec3 max{6};
 	glm::vec3 min{3};
-	Box b2{max, min};
+	Box b2{min, max};
 
 	REQUIRE(b2.min().x == 3);
 	REQUIRE(b2.min().y == 3);

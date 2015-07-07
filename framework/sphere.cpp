@@ -43,7 +43,7 @@ double Sphere::volume() const
 }
 double Sphere::area() const
 {
-	return 4.0 * M_PI * _r * _r * _r;
+	return 4.0 * M_PI * _r * _r;
 }
 
 

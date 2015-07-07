@@ -48,3 +48,27 @@ std::ostream& Box::print(std::ostream& os) const
 	os << "[Box: " << _name <<"}\n[Color: " << _color << "]\n[Min; " << glm::to_string(_min) << "]\n[Max: " << glm::to_string(_max) << "]\n";
 	return os;
 }
+
+bool Box::intersectBox(Ray r, Box b) const
+{
+	double tx1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	double tx2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	
+	double tnear = std::min(tx1, tx2);
+	double tfar = std::max(tx1, tx2);
+
+	double ty1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	double ty2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	
+	tnear = std::min(ty1, ty2);
+	tfar = std::max(ty1, ty2);
+
+	double tz1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	double tz2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	
+	tnear = std::min(tz1, tz2);
+	tfar = std::max(tz1, tz2);
+
+	return tfar >= std::max(0.0, tnear);
+
+}

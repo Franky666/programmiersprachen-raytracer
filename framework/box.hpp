@@ -5,6 +5,7 @@
 #include <string>
 #include <stdlib.h>
 #include "shape.hpp"
+#include "ray.hpp"
 
 class Box : public Shape
 {
@@ -23,6 +24,8 @@ class Box : public Shape
         double area() const override;
     
         std::ostream& print(std::ostream & os) const override;
+
+		bool intersectBox(Ray, Box) const;
 
 	private:
 		glm::vec3 _min;
