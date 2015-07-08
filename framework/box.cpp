@@ -13,8 +13,8 @@ Box::Box(glm::vec3 const& min, glm::vec3 const& max)
 : _min{min}, _max{max}
 {}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Color color)
-: _max{max}, _min{min}, Shape(name, color)
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material material)
+: _max{max}, _min{min}, Shape(name, material)
 {}
 
 Box::~Box()
@@ -45,7 +45,7 @@ double Box::area() const
 
 std::ostream& Box::print(std::ostream& os) const
 {
-	os << "[Box: " << _name <<"}\n[Color: " << _color << "]\n[Min; " << glm::to_string(_min) << "]\n[Max: " << glm::to_string(_max) << "]\n";
+	os << "[Box: " << _name <<"}\n[Material: " << _material << "]\n[Min; " << glm::to_string(_min) << "]\n[Max: " << glm::to_string(_max) << "]\n";
 	return os;
 }
 

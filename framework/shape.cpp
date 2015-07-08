@@ -2,12 +2,12 @@
 #include <iostream>
 #include <string>
 
-Shape::Shape(): _name{"untitled"}, _color{1.0f, 1.0f, 1.0f}
+Shape::Shape(): _name{"untitled"}, _material{"untitled material", Color{}, Color{}, Color{}, 0.0f}
 {
 }
 
-Shape::Shape(std::string const& name, Color const& color)
-: _name{name}, _color{color}
+Shape::Shape(std::string const& name, Material const& material)
+: _name{name}, _material{material}
 {}
 
 
@@ -16,9 +16,9 @@ Shape::~Shape()
 	//std::cout << "c'tor shape" << std::endl;
 }
 
-Color const& Shape::color() const
+Material const& Shape::material() const
 {
-	return _color;
+	return _material;
 }
 
 std::string const& Shape::name() const
@@ -28,7 +28,7 @@ std::string const& Shape::name() const
 
 std::ostream& Shape::print(std::ostream& os) const
 {
-	os << "Shape: [Name: " << _name << "] [Color: " << _color << "] \n ";
+	os << "Shape: [Name: " << _name << "] [Material: " << _material << "] \n ";
 	return os;
 }
 

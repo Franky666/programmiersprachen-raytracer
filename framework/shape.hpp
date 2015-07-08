@@ -1,20 +1,20 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include <string>
-#include "color.hpp"
+#include "material.hpp"
 #include "ray.hpp"
 
 class Shape
 {
 	public:
 			Shape();
-			Shape(std::string const& name, Color const& color);
+			Shape(std::string const& name, Material const& material);
 			virtual ~Shape();
 
 			virtual double volume() const = 0;
 			virtual double area() const = 0;
 
-			Color const& color() const;
+			Material const& material() const;
 			std::string const& name() const;
 
 			virtual std::ostream& print(std::ostream& os) const;
@@ -25,7 +25,7 @@ class Shape
 
 	protected:
 			std::string _name;
-			Color _color;
+			Material _material;
 
 };
 

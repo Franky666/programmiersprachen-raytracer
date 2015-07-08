@@ -16,8 +16,8 @@ Sphere::Sphere(glm::vec3 const& mp, double r)
 {
 }
 
-Sphere::Sphere(glm::vec3 const& mp, double r, std::string name, Color const& color)
-: _mp{mp}, _r{r}, Shape(name, color)
+Sphere::Sphere(glm::vec3 const& mp, double r, std::string name, Material const& material)
+: _mp{mp}, _r{r}, Shape(name, material)
 {
 
 }
@@ -49,7 +49,7 @@ double Sphere::area() const
 
 std::ostream& Sphere::print(std::ostream& os) const
 {
-    os << "[Sphere: " << _name << "]\n[Color: " << _color << "]\n[Point: " << glm::to_string(_mp) << "]\n[radius: " << _r << "]\n";
+    os << "[Sphere: " << _name << "]\n[Material: " << _material << "]\n[Point: " << glm::to_string(_mp) << "]\n[radius: " << _r << "]\n";
     return os;
 }
 
