@@ -2,7 +2,7 @@
 #define SHAPE_HPP
 #include <string>
 #include "color.hpp"
-
+#include "ray.hpp"
 
 class Shape
 {
@@ -18,6 +18,8 @@ class Shape
 			std::string const& name() const;
 
 			virtual std::ostream& print(std::ostream& os) const;
+
+			virtual bool intersect(Ray const& ray, float& t) = 0;
 
 	private:
 

@@ -8,35 +8,6 @@
 #include <iostream>
 
 
-TEST_CASE("Sphere","[Sphere]")
-{
-	Sphere s1{};
-
-	REQUIRE(s1.radius() == 0);
-	REQUIRE(s1.mp().x == 0);
-	REQUIRE(s1.mp().y == 0);
-	REQUIRE(s1.mp().z == 0);
-
-	double r = 4.2;
-	glm::vec3 v{3};
-	Sphere s2{v, r};
-
-	REQUIRE(s2.radius() == 4.2);
-	REQUIRE(s2.mp().x == 3);
-	REQUIRE(s2.mp().y == 3);
-	REQUIRE(s2.mp().z == 3);
-	REQUIRE(Approx(s2.volume()) == 310.339);
-	REQUIRE(Approx(s2.area()) == 221.670);
-
-
-	Color red(255 , 0 , 0);
-	glm::vec3 position (0);
-	Sphere s3{v, r, "s3", red};
-
-	REQUIRE(s3.name() == "s3");
-	//REQUIRE(s3.color() == red);
-}
-
 TEST_CASE("Box","[Box]")
 {
 	Box b1{};
@@ -74,11 +45,6 @@ TEST_CASE("Box","[Box]")
 
 TEST_CASE("ostream","[ostream]")
 {
-
-	std::cout << "===========================\n";
-	std::cout << "======= Aufgabe 6.5 =======\n";
-	std::cout << "===========================\n";
-
 	Color black(0,0,0);
 	glm::vec3 max{6};
 	glm::vec3 min{3};
@@ -86,50 +52,28 @@ TEST_CASE("ostream","[ostream]")
 
 	double r = 3;
 	glm::vec3 v{3};
-	Sphere s1{v, r, "s", black};
 
 	std::cout << b1 << "\n";
-	std::cout << s1 << "\n";
-
-
 }
 
-
-
-TEST_CASE("intersectRaySphere","[intersect]")
+TEST_CASE("intesersect", "[intersect]")
 {
-	//Ray
-	glm::vec3 ray_origin(0.0 ,0.0 ,0.0);
-	
-	glm::vec3 ray_direction(0.0 ,0.0 ,1.0);
-	// Sphere
-	
-	glm::vec3 sphere_center(0.0 ,0.0 ,5.0);
-	
-	float sphere_radius(1.0);
-	
-	float distance(0.0);
-	
-	auto result = glm::intersectRaySphere(ray_origin ,ray_direction,sphere_center,sphere_radius,distance);
-	
-	REQUIRE(distance == Approx(4.0f));
-}
+	Color black(0,0,0);
+	glm::vec3 max{8};
+	glm::vec3 min{4};
+	Box b2{max, min, "b2", black};
 
-
-TEST_CASE("Aufgabe6_8", "[Aufgabe6_8]")
-{	
-	std::cout << "===========================\n";
-	std::cout << "======= Aufgabe 6.8 =======\n";
-	std::cout << "===========================\n";
-	Color red(255 , 0 , 0);
-	glm::vec3 position (0);
-
-	Sphere* s1 = new Sphere(position,1.2,"sphere0",red);
-	Shape* s2 = new Sphere(position,1.2,"sphere1",red);
-	s1 -> print(std::cout);
-	s2 -> print(std::cout);
-	delete s1;
-	delete s2;
+	
+	Ray r1{glm::vec3{2},glm::vec3{3}};		
+	Ray r2{glm::vec3{9},glm::vec3{4}};
+	Ray r3{glm::vec3{3},glm::vec3{15}};
+	float t = 0;
+	// hit
+	REQUIRE(b2.intersect(r1, t) == true);
+	// behind box - no hit
+	REQUIRE(b2.intersect(r2, t) == false);
+	// no hit
+	REQUIRE(b2.intersect(r3, t) == true);
 }
 
 int main(int argc, char *argv[])

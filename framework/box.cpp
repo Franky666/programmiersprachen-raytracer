@@ -49,26 +49,39 @@ std::ostream& Box::print(std::ostream& os) const
 	return os;
 }
 
-bool Box::intersectBox(Ray r, Box b) const
+bool Box::intersect(Ray const& r, float& t)
 {
-	double tx1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
-	double tx2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
+	float dirfrac_x = 1.0f / r.direction_.x;
+	float dirfrac_y = 1.0f / r.direction_.y;
+	float dirfrac_z = 1.0f / r.direction_.z;
+
+	float t1x = (_min.x - r.origin_.x) * dirfrac_x;
+	float t2x = (_max.x - r.origin_.x) * dirfrac_x;
+
+	float t1y = (_min.y - r.origin_.y) * dirfrac_y;
+	float t2y = (_max.y - r.origin_.y) * dirfrac_y;
+
+	float t1z = (_min.z - r.origin_.z) * dirfrac_z;
+	float t2z = (_max.z - r.origin_.z) * dirfrac_z;
+
+	float tmin = std::max(std::max(std::min(t1x, t2x), std::min(t1y, t2y)), std::min(t1z, t2z));
+	float tmax = std::min(std::min(std::max(t1x, t2x), std::max(t1y, t2y)), std::max(t1z, t2z));
+
+	// box is behind ray origin
+	if(tmax < 0)
+	{
+		t = tmax;
+		return false;
+	}
 	
-	double tnear = std::min(tx1, tx2);
-	double tfar = std::max(tx1, tx2);
+	// if tmin > tmax, ray doesn't intersect AABB
+	if(tmin > tmax)
+	{
+		t = tmax;
+		return false;
+	}
 
-	double ty1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
-	double ty2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
-	
-	tnear = std::min(ty1, ty2);
-	tfar = std::max(ty1, ty2);
+	t = tmin;
 
-	double tz1 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
-	double tz2 = (b._min.x - r.origin_.x)/glm::normalize(r.direction_).x;
-	
-	tnear = std::min(tz1, tz2);
-	tfar = std::max(tz1, tz2);
-
-	return tfar >= std::max(0.0, tnear);
-
+	return true;
 }
