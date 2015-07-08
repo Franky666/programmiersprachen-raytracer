@@ -5,6 +5,12 @@
  : _shapes()
  {}
 
+void
+Scene::render() const
+{
+
+}
+
  void 
  Scene::add(Shape* shape)
  {

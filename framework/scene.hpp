@@ -4,6 +4,9 @@
 class Scene {
 	public:
 		Scene();
+	
+		void render() const;
+
 		void add(Shape* shape);
 		std::vector<Shape*> getShapes() const;
 		
