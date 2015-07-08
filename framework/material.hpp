@@ -12,10 +12,10 @@ class Material
 		
 		//getter
 		std::string const& name() const;
-		Color const& ka() const;
-		Color const& kd() const;
-		Color const& ks() const;
-		float const& m() const;
+		Color ka() const;
+		Color kd() const;
+		Color ks() const;
+		float m() const;
 		
 
 		friend std::ostream& operator<<(std::ostream& os, Material const& ma);

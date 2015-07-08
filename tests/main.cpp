@@ -6,7 +6,7 @@
 #include "sphere.hpp"
 #include "box.hpp"
 #include <iostream>
-
+#include "material.hpp"
 
 TEST_CASE("Box","[Box]")
 {
@@ -36,10 +36,10 @@ TEST_CASE("Box","[Box]")
 	REQUIRE(b2.volume() == 27);
 
 	Color red(255,0,0);
-	//Box b3{min, max, "b3", red};
+	Box b3{min, max, "b3", red};
 	
-	//REQUIRE(b3.name() == "b3");
-	//REQUIRE(b3.color() == red);
+	REQUIRE(b3.name() == "b3");
+	REQUIRE(b3.color() == red);
 
 }
 
@@ -75,6 +75,33 @@ TEST_CASE("intesersect", "[intersect]")
 	// no hit
 	REQUIRE(b2.intersect(r3, t) == true);
 }
+
+TEST_CASE("material", "[material]")
+{
+	Color red(255,0,0);
+	Color black(0.0f, 0.0f, 0.0f);	
+
+	// default c'tor
+	Material m1{};
+	//name
+	REQUIRE(m1.name() == "untitled");
+	// colors ka, kd, ks = standaarts
+	REQUIRE(m1.ka() == black);	
+	REQUIRE(m1.kd() == black);
+	REQUIRE(m1.ks() == black);
+
+
+	// user c'tor
+	Material m2{"material", black, red, red, 0.0};
+	//name
+	REQUIRE(m2.name() == "material");
+	// colors ka, kd, ks 
+	REQUIRE(m2.ka() == black);	
+	REQUIRE(m2.kd() == red);
+	REQUIRE(m2.ks() == red);
+
+}
+
 
 int main(int argc, char *argv[])
 {
