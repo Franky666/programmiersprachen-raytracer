@@ -24,4 +24,6 @@ class Material
 			std::string _name;
 			Color _ka, _kd, _ks;
 			float _m;
-}
+};
+
+#endif

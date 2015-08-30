@@ -1,3 +1,5 @@
+#include "material.hpp"
+
 Material::Material()
 : _name{"untidled"}, _ka{0.0f, 0.0f, 0.0f}, _kd{0.0f, 0.0f, 0.0f}, _ks{0.0f, 0.0f, 0.0f}, _m{0.0}
 {
@@ -7,7 +9,7 @@ Material::~Material()
 {
 }
 
-Material::Material(std::string const& name, Color ka, Color kd, Color ks, float const& m);
+Material::Material(std::string const& name, Color ka, Color kd, Color ks, float const& m)
 : _name{name}, _ka{ka}, _kd{kd}, _ks{ks}, _m{m}
 {
 }
@@ -19,17 +21,17 @@ std::string const& Material::name() const
 
 Color Material::ka() const
 {
-	return _ka
+	return _ka;
 }
 
 Color Material::kd() const
 {
-	return _kd
+	return _kd;
 }
 
 Color Material::ks() const
 {
-	return _ks
+	return _ks;
 }
 
 float Material::m() const
