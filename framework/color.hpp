@@ -14,7 +14,6 @@
 
 struct Color
 {
-  Color() : r(0.0f), g(0.0f), b(0.0f) {}
   Color(float red, float green, float blue) : r(red), g(green), b(blue) {}
   float r;
   float g;
@@ -22,7 +21,7 @@ struct Color
 
   friend std::ostream& operator<<(std::ostream& os, Color const& c)
   {
-    os << "(" << c.r << "," << c.g << "," << c.b << ")";
+    os << "(" << c.r << "," << c.g << "," << c.b << ")\n";
     return os;
   }
 
@@ -54,18 +53,6 @@ struct Color
     auto tmp(a);
     tmp -= b;
     return tmp;
-  }
-
-  friend bool operator==(Color const& a, Color const& b)
-  {
-    if(a.r == b.r && a.g == b.g && a.b == b.b)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
   }
 };
 
