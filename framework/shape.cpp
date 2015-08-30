@@ -3,15 +3,17 @@
 #include <string>
 
 Shape::Shape()
-: _name{"untitled"}, _material{"untitled material"}, Color{}, Color{}, Color{}, 0.0f}
+: _name{"untitled"}, 
+  _material{"untitled material", Color{}, Color{}, Color{}, 0.0f}
+{}
 
 Shape::Shape(std::string const& name, Material const& material)
-: _name{name}, _material{material}
+: _name{name}, 
+  _material{material}
 {}
 
 Shape::~Shape()
-{
-}
+{}
 
 Material const& Shape::material() const
 {
@@ -23,7 +25,7 @@ std::string const& Shape::name() const
 	return _name;
 }
 
-std::ostream& Shape::pring(std::ostream& os) const
+std::ostream& Shape::print(std::ostream& os) const
 {
 	os << "Shape: [Name: " << _name << "] [Material: " << _material << "] \n ";
 	return os;

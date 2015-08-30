@@ -1,7 +1,7 @@
 #include "material.hpp"
 
 Material::Material()
-: _name{"untidled"}, _ka{0.0f, 0.0f, 0.0f}, _kd{0.0f, 0.0f, 0.0f}, _ks{0.0f, 0.0f, 0.0f}, _m{0.0}
+: _name{"untitled"}, _ka{0.0f, 0.0f, 0.0f}, _kd{0.0f, 0.0f, 0.0f}, _ks{0.0f, 0.0f, 0.0f}, _m{0.0}
 {
 }
 
