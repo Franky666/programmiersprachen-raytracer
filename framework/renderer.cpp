@@ -9,6 +9,11 @@
 
 #include "renderer.hpp"
 
+//tmp????
+#include "camera.hpp"
+#include "sphere.hpp"
+
+
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
   , height_(h)
@@ -19,7 +24,11 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 
 void Renderer::render()
 {
-  const std::size_t checkersize = 20;
+
+	Camera::Camera cam_1;
+	Sphere::Sphere sphere_1;
+/*
+const std::size_t checkersize = 20;
 
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
@@ -34,6 +43,7 @@ void Renderer::render()
     }
   }
   ppm_.save(filename_);
+*/
 }
 
 void Renderer::write(Pixel const& p)
