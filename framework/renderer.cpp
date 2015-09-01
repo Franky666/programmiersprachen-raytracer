@@ -12,7 +12,7 @@
 //tmp????
 #include "camera.hpp"
 #include "sphere.hpp"
-
+#include "box.hpp"
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
@@ -25,15 +25,16 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 void Renderer::render()
 {
 
-	Camera::Camera cam_1;
-	Sphere::Sphere sphere_1;
-/*
-const std::size_t checkersize = 20;
+	Camera cam_1;
+	Sphere s1;
+	Box b1;
 
-  for (unsigned y = 0; y < height_; ++y) {
-    for (unsigned x = 0; x < width_; ++x) {
-      Pixel p(x,y);
-      if ( ((x/checkersize)%2) != ((y/checkersize)%2)) {
+	const std::size_t checkersize = 20;
+
+	  for (unsigned y = 0; y < height_; ++y) {
+    	for (unsigned x = 0; x < width_; ++x) {
+     	 Pixel p(x,y);
+     	 if ( ((x/checkersize)%2) != ((y/checkersize)%2)) {
         p.color = Color(0.0, 1.0, float(x)/height_);
       } else {
         p.color = Color(1.0, 0.0, float(y)/width_);
@@ -43,7 +44,7 @@ const std::size_t checkersize = 20;
     }
   }
   ppm_.save(filename_);
-*/
+
 }
 
 void Renderer::write(Pixel const& p)

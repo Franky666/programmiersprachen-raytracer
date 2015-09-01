@@ -4,7 +4,6 @@
 #include <glm/vec3.hpp>
 #include <string>
 #include <stdlib.h>
-#include "shape.hpp"
 #include "ray.hpp"
 
 class Box : public Shape

@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <glm/vec3.hpp>
+#include "ray.hpp"
 
 class Sphere: public Shape
 {
@@ -14,6 +15,7 @@ class Sphere: public Shape
 		Sphere(glm::vec3 const& mp, double r);
 		Sphere(glm::vec3 const& mp, double r, std::string name, Material const& material);
 
+		// get-methods
 		glm::vec3 const& mp() const;
 		double radius() const;
 
@@ -22,6 +24,7 @@ class Sphere: public Shape
 
     	std::ostream& print(std::ostream& os) const override;
     
+		virtual bool intersect(Ray const& r, float& t);
 
 	private:
 		glm::vec3 _mp;
