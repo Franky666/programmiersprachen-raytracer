@@ -8,7 +8,7 @@ class Camera
 	public:
 			// ctors dtors
 			Camera();
-			Camera(glm::vec3 const&, float direction);
+			Camera(glm::vec3 const& direction, float fov);
 			Camera(std::string const& name, float fov); 
 			~Camera();
 

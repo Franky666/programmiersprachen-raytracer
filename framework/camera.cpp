@@ -3,7 +3,8 @@
 //ctor dtor
 Camera::Camera()
 : _position{0.0},
-  _direction{0.0, 0.0, -1.0}
+  _direction{0.0, 0.0, -1.0},
+  _fov(40.0)
 {
 	//implement me!
 }
