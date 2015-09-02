@@ -29,6 +29,28 @@ Camera::~Camera()
 
 //get-methods
 
+void Camera::setName(std::string const& name) 
+{
+	_name = name;
+}
+
+void Camera::setPosition(glm::vec3 const& position)
+{
+	_position = position;
+}
+
+void Camera::setDirection(glm::vec3 const& direction) 
+{
+	_direction = direction;
+}
+
+void Camera::setFOV(float fov)
+{
+	_fov = fov;
+}
+
+// setters
+
 std::string const& Camera::name() const
 {
 	return _name;
@@ -42,4 +64,9 @@ glm::vec3 const& Camera::position() const
 glm::vec3 const& Camera::direction() const
 {
 	return _direction;
+}
+
+float Camera::fov() const
+{
+	return _fov;
 }

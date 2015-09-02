@@ -1,6 +1,7 @@
 #ifndef RAY_HPP
 #define RAY_HPP
 #include <glm/glm.hpp>
+#include <iostream>
 
 struct Ray
 {
@@ -15,5 +16,7 @@ struct Ray
 	: origin_{nOrigin}, direction_{nDirection}
 	{}
 };
+
+std::ostream& operator<<(std::ostream& os, Ray const& r);
 
 #endif

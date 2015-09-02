@@ -4,8 +4,8 @@
 
 int main(int argc, char* argv[])
 {
-  unsigned const width = 600;
-  unsigned const height = 600;
+  unsigned const width = 640;
+  unsigned const height = 480;
   std::string const filename = "./checkerboard.ppm";
 
   Renderer app(width, height, filename);

@@ -16,6 +16,13 @@ class Camera
 			std::string const& name() const;
 			glm::vec3 const& position() const;
 			glm::vec3 const& direction() const;
+			float fov() const;
+
+			// setters
+			void setName(std::string const& name);
+			void setPosition(glm::vec3 const& position);
+			void setDirection(glm::vec3 const& direction);
+			void setFOV(float fov);
 
 	private:
 			glm::vec3 _position;
