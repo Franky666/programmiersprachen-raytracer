@@ -13,7 +13,7 @@
 #include "camera.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
-
+#include <math.h>
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
