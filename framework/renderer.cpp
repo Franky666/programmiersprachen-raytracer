@@ -38,7 +38,9 @@ void Renderer::render()
 	
 	Camera cam_1("cam_1", 75.0f);
 	// calculate camera distance
-	float d = (width_ * 0.5) / (0.5 * cam_1.fov());
+
+	//float d = (width_ * 0.5) / (0.5 * cam_1.fov());
+	float d = (-(width_ * 0.5) / std::tan(0.5 * cam_1.fov() * M_PI / 180));
 	cam_1.setPosition(glm::vec3(0.0f, 0.0f, d));
 	
 	Sphere s1{{-100.0, 30.0, -4.0}, 60};
