@@ -1,4 +1,11 @@
+#ifndef SDFLOADER_HPP
+#define SDFLOADER_HPP
 #include <string>
+#include <scene.hpp>
+#include <sstream>
+#include <material.hpp>
+#include <box.hpp>
+#include <sphere.hpp>
 #include <scene.hpp>
 
 class SDFLoader {
@@ -26,3 +33,4 @@ class SDFLoader {
 			std::string _filename;
 			std::string _path;
 };
+#endif

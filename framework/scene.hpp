@@ -1,10 +1,14 @@
+#ifndef SCENE_HPP
+#define SCENE_HPP
 #include <vector>
 #include <shape.hpp>
 
 class Scene {
+	
 	public:
 		Scene();
-	
+		~Scene();
+
 		void render() const;
 		void add(Material* material);
 		void add(Shape* shape);
@@ -17,3 +21,4 @@ class Scene {
 	// std::vector<Light> _lights;
 	// std::vector<Camera> _cameras;
 };
+#endif

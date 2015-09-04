@@ -5,7 +5,6 @@
 #include <sstream>
 #include <iostream>
 
-
 // ctor dtor
 SDFLoader::SDFLoader(std::string const& filename)
 : _filename(filename), 
@@ -101,7 +100,7 @@ create_composite(std::istringstream&)
 }
 
 void
-create_material(std::istringstream&)
+create_material(std::istringstream& iss)
 {
 	std::string name;
 	float r, g, b, m;
@@ -115,11 +114,34 @@ create_material(std::istringstream&)
 	Color ks(r, g, b);
 
 	Material material = Material(name, ka, kd, ks, m);
-	
-
 }
-void
-create_sphere(std::istringstream&)
-{
 
+void
+create_sphere(std::istringstream& iss)
+{
+	/*std::string name, materialName;
+	float x, y, z, r;
+
+	iss >> name >> x >> y >> z;
+	glm::vec3 mp(x, y, z);
+
+	iss >> r;
+
+	iss >> materialName;
+
+	std::shared_ptr<Material> ma = _scene.getMaterial(materialName);
+	std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(Sphere(name, ma, mp, r));
+
+	_scene.addShape(name, sphere);
+
+	std::cout << name << " added " << std::endl;
+	*/
+}
+
+
+
+void
+issprint(std::stringstream&)
+{
+	
 }

@@ -14,6 +14,7 @@
 #include <sphere.hpp>
 #include <box.hpp>
 #include <cmath>
+#include <sdfloader.hpp>
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
@@ -26,10 +27,6 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 void Renderer::render()
 {
 
-
-
-	// calc distance cam
-	
 
 	// Viewplane	
 	//const std::size_t checkersize = 20;
@@ -48,6 +45,8 @@ void Renderer::render()
 	Ray primaryRay;
 	primaryRay.origin_ = cam_1.position();
 	
+	//SDFLoader();
+
 	// Complete 
 	//for (unsigned y = (height_ / 2); y > (-height_ / 2); --y) {
 	//	for (unsigned x = (-width_ / 2); x < (width_ / 2); ++x) {
