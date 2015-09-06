@@ -10,6 +10,7 @@ int main(int argc, char* argv[])
 
 	SDFLoader fileloader{filename};
 	fileloader.load();
+
   //unsigned const width = 640;
   //unsigned const height = 480;
   //std::string const filename = "./checkerboard.ppm";

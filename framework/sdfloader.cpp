@@ -21,14 +21,13 @@ void
 SDFLoader::render(std::vector<std::string> const& tokens)
 {
 
-	unsigned const width = 640;
-	unsigned const height = 480;
+// parse tokens
 	load();
-	// parse tokens
-	// ...
 	
 	// create Renderer object
-	// Renderer renderer(w, h, file);
+	unsigned const width = 640;
+	unsigned const height = 480;
+	//Renderer renderer(width, height, file);
 
 	// fetch camera by name from scene:
 	// for(...)
@@ -79,14 +78,15 @@ SDFLoader::define_sphere(std::vector<std::string> const& tokens)
 
 	std::vector<std::shared_ptr<Material>> materials = _scene.materials();
 	for(auto material_ptr : materials) {
+		std::cout << "Looking at material: " << material_ptr->name() << std::endl;
 		if (material_ptr->name() == material_name) {
 			Sphere sphere(center, radius, name, *material_ptr);
 			_scene.add(std::make_shared<Sphere>(sphere));
-		} else {
-			// material not found - throw exception
-			throw std::runtime_error("illegal sphere definition (material not found)");
 		}
 	}
+	//material not found - throw exception
+	//throw std::runtime_error("illegal sphere definition (material not found)");
+		
 }
 
 void
@@ -96,17 +96,19 @@ SDFLoader::define_box(std::vector<std::string> const& tokens)
 	glm::vec3 p1{std::stof(tokens[4]), std::stof(tokens[5]), std::stof(tokens[6])};
 	glm::vec3 p2{std::stof(tokens[7]), std::stof(tokens[8]), std::stof(tokens[9])};
 	std::string material_name = tokens[10];
-
+	std::cout << material_name << std::endl;
 	std::vector<std::shared_ptr<Material>> materials = _scene.materials();
 	for(auto material_ptr : materials) {
+		std::cout << "Looking at material: " << material_ptr->name() << std::endl;
 		if(material_ptr->name() == material_name){
 			Box box(p1, p2, name, *material_ptr);
+			std::cout << box.name() << *material_ptr;
 			_scene.add(std::make_shared<Box>(box));
-		} else {	
-			// material not found - throw exception
-			throw std::runtime_error("illegal box defintion (material not found)");
-		}
+		} 
 	}
+	//material not found - throw exception;
+	//throw std::runtime_error("illegal box defintion (material not found)");
+
 }
 
 void
