@@ -7,8 +7,10 @@
 #include <box.hpp>
 #include <sphere.hpp>
 #include <scene.hpp>
+#include <camera.hpp>
+#include <light.hpp>
 
-class SDFLoader {
+class SDFLoader{
 	
 	public:
 			//ctor dtor
@@ -17,20 +19,20 @@ class SDFLoader {
 			SDFLoader(std::string path, std::string filename);
 			~SDFLoader();
 			
-			Scene load();
+			void load();
 
-			void readSDF(std::string const& path);
-			void create_composite(std::istringstream&);
-			void create_material(std::istringstream&);
-			void create_sphere(std::istringstream&);
-			void create_box(std::istringstream&);
-			void create_light(std::istringstream&);
-			void create_ambiet(std::istringstream&);
-			void issprint(std::istringstream&);
+	private:
+			void render(std::vector<std::string> const& tokens);
+			void add_camera(std::vector<std::string> const& tokens);
+			void define(std::vector<std::string> const& tokens);
+			void define_sphere(std::vector<std::string> const& tokens);
+			void define_box(std::vector<std::string> const& tokens);
+			void define_shape(std::vector<std::string> const& tokens);
+			void define_material(std::vector<std::string> const& tokens);
+			void define_light(std::vector<std::string> const& tokens);
 
 	private:
 			Scene _scene;
 			std::string _filename;
-			std::string _path;
 };
 #endif

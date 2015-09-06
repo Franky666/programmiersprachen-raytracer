@@ -1,7 +1,10 @@
 #ifndef LIGHT_HPP
 #define LIGHT_HPP
-/*
-class Light : public SceneObject
+
+#include <color.hpp>
+#include <glm/vec3.hpp>
+
+class Light
 {
 	public:
 			//ctors dtors
@@ -24,9 +27,9 @@ class Light : public SceneObject
 			Color _ld;
 			Color _la;
 
-}
+};
 
 //operators
 std::ostream& operator<<(std::ostream&, Light const&);
-*/
+
 #endif

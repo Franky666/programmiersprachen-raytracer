@@ -24,7 +24,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   , ppm_(width_, height_)
 {}
 
-void Renderer::render()
+void Renderer::render(Scene const& scene, Camera const& camera)
 {
 
 
@@ -44,8 +44,6 @@ void Renderer::render()
 	Box b1;
 	Ray primaryRay;
 	primaryRay.origin_ = cam_1.position();
-	
-	//SDFLoader();
 
 	// Complete 
 	//for (unsigned y = (height_ / 2); y > (-height_ / 2); --y) {

@@ -1,15 +1,17 @@
 #include "light.hpp"
-/*
+
+#include <glm/gtx/string_cast.hpp>
+
 //ctors dtors
 Light::Light()
 : _name{"untitledLight"},
   _position{0.0},
   _ld{Color{}},
-  _la{Color{}
+  _la{Color{}}
 {
 }
 
-Light::Light(std::string const& name, glm::vec3 const& position, Colo const& la, Color const& ld)
+Light::Light(std::string const& name, glm::vec3 const& position, Color const& la, Color const& ld)
 : _name{name},
   _position{position},
   _ld{ld},
@@ -17,12 +19,6 @@ Light::Light(std::string const& name, glm::vec3 const& position, Colo const& la,
 {
 
 }
-
-Light::~Light()
-{
-
-}
-
 //get-methods
 
 std::string const& Light::name() const
@@ -30,7 +26,7 @@ std::string const& Light::name() const
 	return _name;
 }
 
-std::vec3 const& Light::position const
+glm::vec3 const& Light::position() const
 {
 	return _position;
 }
@@ -40,7 +36,7 @@ Color Light::ld() const
 	return _ld;
 }
 
-Color Light::la const
+Color Light::la() const
 {
 	return _la;
 }
@@ -52,7 +48,7 @@ std::ostream& Light::print(std::ostream& os) const
 			"Name: " << _name << "\n" <<
 			"Position: " << glm::to_string(_position) << "\n" <<
 			"ld-value: " << _ld <<
-			"la-value: " << _la <<;
+			"la-value: " << _la;
 
 	return os;
 }
@@ -61,4 +57,4 @@ std::ostream& operator<<(std::ostream& os, Light const& l)
 {
 	return l.print(os);
 }
-*/
+
