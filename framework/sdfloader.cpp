@@ -20,9 +20,13 @@ SDFLoader::SDFLoader(std::string const& filename)
 void
 SDFLoader::render(std::vector<std::string> const& tokens)
 {
+
+	unsigned const width = 640;
+	unsigned const height = 480;
+	load();
 	// parse tokens
 	// ...
-
+	
 	// create Renderer object
 	// Renderer renderer(w, h, file);
 
@@ -38,7 +42,7 @@ SDFLoader::render(std::vector<std::string> const& tokens)
    //std::thread thr([&app]() { app.render(); });
 
   // std::thread thr([&app]() { sdfloader.load(); });
-
+/*
   Window win(glm::ivec2(width,height));
 
    while (!win.shouldClose()) {
@@ -53,7 +57,7 @@ SDFLoader::render(std::vector<std::string> const& tokens)
  }
 
    thr.join();
-
+*/
 }
 
 void
@@ -78,10 +82,11 @@ SDFLoader::define_sphere(std::vector<std::string> const& tokens)
 		if (material_ptr->name() == material_name) {
 			Sphere sphere(center, radius, name, *material_ptr);
 			_scene.add(std::make_shared<Sphere>(sphere));
+		} else {
+			// material not found - throw exception
+			throw std::runtime_error("illegal sphere definition (material not found)");
 		}
 	}
-	// material not found - throw exception
-	throw std::runtime_error("illegal sphere definition (material not found)");
 }
 
 void
@@ -90,17 +95,18 @@ SDFLoader::define_box(std::vector<std::string> const& tokens)
 	std::string name = tokens[3];
 	glm::vec3 p1{std::stof(tokens[4]), std::stof(tokens[5]), std::stof(tokens[6])};
 	glm::vec3 p2{std::stof(tokens[7]), std::stof(tokens[8]), std::stof(tokens[9])};
-	std::string material_name =  tokens[10];
+	std::string material_name = tokens[10];
 
 	std::vector<std::shared_ptr<Material>> materials = _scene.materials();
 	for(auto material_ptr : materials) {
 		if(material_ptr->name() == material_name){
 			Box box(p1, p2, name, *material_ptr);
 			_scene.add(std::make_shared<Box>(box));
+		} else {	
+			// material not found - throw exception
+			throw std::runtime_error("illegal box defintion (material not found)");
 		}
 	}
-	// material not found - throw exception
-	throw std::runtime_error("illegal sphere defintion (material not found)");
 }
 
 void
