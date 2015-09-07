@@ -27,7 +27,7 @@ SDFLoader::render(std::vector<std::string> const& tokens)
 	// create Renderer object
 	unsigned const width = 640;
 	unsigned const height = 480;
-	//Renderer renderer(width, height, file);
+	Renderer renderer(width, height, _filename);
 
 	// fetch camera by name from scene:
 	// for(...)
@@ -102,7 +102,7 @@ SDFLoader::define_box(std::vector<std::string> const& tokens)
 		std::cout << "Looking at material: " << material_ptr->name() << std::endl;
 		if(material_ptr->name() == material_name){
 			Box box(p1, p2, name, *material_ptr);
-			std::cout << box.name() << *material_ptr;
+			//std::cout << box.name() << *material_ptr;
 			_scene.add(std::make_shared<Box>(box));
 		} 
 	}
