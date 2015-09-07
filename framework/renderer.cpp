@@ -87,11 +87,11 @@ void Renderer::render(Scene const& scene, Camera& camera)
 				for (auto light_ptr : scene.lights()) {
 					// diffuse
 					auto light_vec = glm::normalize(light_ptr->position() - hr.position);
-					auto dot = glm::dot(light_vec, hr.normal);
+					auto dot = glm::dot(hr.normal, light_vec);
 					if (dot > 0) 
 						p.color += hr.material_ptr->kd() * light_ptr->ld() * dot;
 					// specular
-					auto eye_vec = glm::normalize(hr.position - camera.position());
+					auto eye_vec = glm::normalize((2.0f * dot * hr.normal) - light_vec);
 					auto dot2 = glm::dot(light_vec, eye_vec);
 					if (dot2 > 0) {
 						double value = std::abs(std::pow(dot2, hr.material_ptr->m()));
