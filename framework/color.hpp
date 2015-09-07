@@ -67,6 +67,14 @@ struct Color
       return false;
     }
   }
+
+  friend Color operator*(Color const& a, Color const& b) {
+	return Color{a.r * b.r, a.g * b.g, a.b * b.b};
+  }
+
+  friend Color operator*(Color const& a, float b) {
+	return Color{a.r * b, a.g * b, a.b * b};
+  }
 };
 
 #endif //#define BUW_COLOR_HPP

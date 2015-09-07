@@ -15,6 +15,7 @@
 #include <iterator>
 #include <fstream>
 
+/*
 TEST_CASE("intesersect", "[intersect]")
 {
 	Material black{};
@@ -99,6 +100,8 @@ TEST_CASE("sdfloader_material", "[sdfloader]")
 	REQUIRE(materials.at(1).ks() == Color(0, 0, 1));
 	REQUIRE(materials.at(1).m() == 1);
 }
+*/
+
 
 int main(int argc, char *argv[])
 {

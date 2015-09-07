@@ -49,7 +49,7 @@ std::ostream& Box::print(std::ostream& os) const
 	return os;
 }
 
-bool Box::intersect(Ray const& r, float& t)
+bool Box::intersect(Ray const& r, std::shared_ptr<HitRecord>& hit_record)
 {
 	float dirfrac_x = 1.0f / r.direction_.x;
 	float dirfrac_y = 1.0f / r.direction_.y;
@@ -70,18 +70,38 @@ bool Box::intersect(Ray const& r, float& t)
 	// box is behind ray origin
 	if(tmax < 0)
 	{
-		t = tmax;
+		//hit_record->t = tmax;
 		return false;
 	}
 	
 	// if tmin > tmax, ray doesn't intersect AABB
 	if(tmin > tmax)
 	{
-		t = tmax;
+		//hit_record->t = tmax;
 		return false;
 	}
 
-	t = tmin;
+	// fill hit_record for shading information
+	hit_record->t = tmin;
+
+	hit_record->position = glm::vec3{hit_record->t * r.direction_};
+
+	// find normal
+	float eps = 0.0001f;
+	if (std::abs(hit_record->position.x - t1x) < eps)
+		hit_record->normal = glm::vec3{-1, 0, 0};
+	else if (std::abs(hit_record->position.x - t2x) < eps)
+		hit_record->normal = glm::vec3{1, 0, 0};
+	else if (std::abs(hit_record->position.y - t1y) < eps)
+		hit_record->normal = glm::vec3{0, -1, 0};
+	else if (std::abs(hit_record->position.y - t2y) < eps)
+		hit_record->normal = glm::vec3{0, 1, 0};
+	else if (std::abs(hit_record->position.z - t1z) < eps)
+		hit_record->normal = glm::vec3{0, 0, -1};
+	else if (std::abs(hit_record->position.z - t2z) < eps)
+		hit_record->normal = glm::vec3{0, 0, 1};
+
+	hit_record->material_ptr = std::make_shared<Material>(_material);
 
 	return true;
 }

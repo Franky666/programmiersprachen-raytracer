@@ -3,6 +3,7 @@
 #include <string>
 #include "material.hpp"
 #include "ray.hpp"
+#include <hitrecord.hpp>
 
 class Shape
 {
@@ -20,7 +21,7 @@ class Shape
 
 			virtual std::ostream& print(std::ostream& os) const;
 
-			virtual bool intersect(Ray const& ray, float& t) = 0;
+			virtual bool intersect(Ray const& ray, std::shared_ptr<HitRecord>& hit_record) = 0;
 
 	private:
 

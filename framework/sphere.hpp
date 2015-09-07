@@ -24,7 +24,7 @@ class Sphere: public Shape
 
     	std::ostream& print(std::ostream& os) const override;
     
-		virtual bool intersect(Ray const& r, float& t);
+		virtual bool intersect(Ray const& r, std::shared_ptr<HitRecord>& hit_record);
 
 	private:
 		glm::vec3 _mp;

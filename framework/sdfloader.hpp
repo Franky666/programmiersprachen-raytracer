@@ -23,8 +23,8 @@ class SDFLoader{
 
 	private:
 			void render(std::vector<std::string> const& tokens);
-			void add_camera(std::vector<std::string> const& tokens);
 			void define(std::vector<std::string> const& tokens);
+			void define_camera(std::vector<std::string> const& tokens);
 			void define_sphere(std::vector<std::string> const& tokens);
 			void define_box(std::vector<std::string> const& tokens);
 			void define_shape(std::vector<std::string> const& tokens);

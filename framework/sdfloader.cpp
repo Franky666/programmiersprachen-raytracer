@@ -22,50 +22,57 @@ SDFLoader::render(std::vector<std::string> const& tokens)
 {
 
 // parse tokens
-	load();
+	//load();
 	
-	// create Renderer object
-	unsigned const width = 640;
-	unsigned const height = 480;
-	Renderer renderer(width, height, _filename);
+	std::string camera_name = tokens[1];
+	std::string ppm_filename = tokens[2];
+	unsigned int width = std::stoi(tokens[3]);
+	unsigned int height = std::stoi(tokens[4]);
+
 
 	// fetch camera by name from scene:
-	// for(...)
-	//    if (camera_ptr->name() == camera_name)
+	
+	std::shared_ptr<Camera> camera;
+	for(auto camera_ptr : _scene.cameras()) {
+	    if (camera_ptr->name() == camera_name) { 
+			camera = camera_ptr;
+		}
+	}
+	if (!camera)
+		throw std::runtime_error("SDF error, camera not found");
 
-	// finally call renderer.render()
-	// renderer.render(_scene, camera)
-
-
-   //Renderer app(width, height, filename);
-   //std::thread thr([&app]() { app.render(); });
+ 	std::cout << "Creating renderer object..." << std::endl;
+	Renderer renderer(width, height, ppm_filename);
+	
+    std::thread thr([&renderer, this, &camera]() { renderer.render(_scene, *camera); });
 
   // std::thread thr([&app]() { sdfloader.load(); });
-/*
-  Window win(glm::ivec2(width,height));
 
-   while (!win.shouldClose()) {
-   if (win.isKeyPressed(GLFW_KEY_ESCAPE)) {
-      win.stop();
-     }
+    Window win(glm::ivec2(width,height));
 
-     glDrawPixels( width, height, GL_RGB, GL_FLOAT
-                 , app.colorbuffer().data());
+    while (!win.shouldClose()) {
+        if (win.isKeyPressed(GLFW_KEY_ESCAPE)) {
+           win.stop();
+        }
 
-     win.update();
- }
+        glDrawPixels( width, height, GL_RGB, GL_FLOAT
+                     , renderer.colorbuffer().data());
 
-   thr.join();
-*/
+        win.update();
+    }
+
+    thr.join();
+
 }
 
 void
-SDFLoader::add_camera(std::vector<std::string> const& tokens) 
+SDFLoader::define_camera(std::vector<std::string> const& tokens) 
 {
-	std::string name = tokens[1];
-	float fov{std::stof(tokens[2])};
+	std::string name = tokens[2];
+	float fov{std::stof(tokens[3])};
 	Camera camera(name, fov);
 	_scene.add(std::make_shared<Camera>(camera));
+	std::cout << "Added camera " << name << " with fov: " << fov << std::endl;
 }
 
 void 
@@ -82,10 +89,11 @@ SDFLoader::define_sphere(std::vector<std::string> const& tokens)
 		if (material_ptr->name() == material_name) {
 			Sphere sphere(center, radius, name, *material_ptr);
 			_scene.add(std::make_shared<Sphere>(sphere));
+			return;
 		}
 	}
 	//material not found - throw exception
-	//throw std::runtime_error("illegal sphere definition (material not found)");
+	throw std::runtime_error("illegal sphere definition (material not found)");
 		
 }
 
@@ -104,10 +112,11 @@ SDFLoader::define_box(std::vector<std::string> const& tokens)
 			Box box(p1, p2, name, *material_ptr);
 			//std::cout << box.name() << *material_ptr;
 			_scene.add(std::make_shared<Box>(box));
+			return;
 		} 
 	}
 	//material not found - throw exception;
-	//throw std::runtime_error("illegal box defintion (material not found)");
+	throw std::runtime_error("illegal box defintion (material not found)");
 
 }
 
@@ -144,7 +153,7 @@ SDFLoader::define_light(std::vector<std::string> const& tokens)
 	Color La{std::stof(tokens[6]), std::stof(tokens[7]), std::stof(tokens[8])};
 	Color Ld{std::stof(tokens[9]), std::stof(tokens[10]), std::stof(tokens[11])};
 
-	Light light(name, pos, Ld, La);
+	Light light(name, pos, La, Ld);
 	_scene.add(std::make_shared<Light>(light));
 }
 
@@ -157,6 +166,8 @@ SDFLoader::define(std::vector<std::string> const& tokens)
 		define_material(tokens);
 	} else if (tokens[1] == "light" && tokens.size() == 12) {
 		define_light(tokens);
+    } else if (tokens[1] == "camera" && tokens.size() == 4) {
+		define_camera(tokens);
 	} else {
 		throw std::runtime_error("illegal definition (general)");
 	}
@@ -172,13 +183,11 @@ SDFLoader::load()
 		std::istringstream iss(line);
 		std::vector<std::string> tokens{std::istream_iterator<std::string>{iss},
 										std::istream_iterator<std::string>{}};
-		if (tokens.size() < 3) {
-			throw std::runtime_error("illegal sdf line");
+		if (tokens.size() > 0 && tokens[0].substr(0, 1) == "#") {
+			continue;
 		}
 		if (tokens[0] == "render" && tokens.size() == 5) {
 			render(tokens);
-		} else if(tokens[0] == "camera" && tokens.size() == 4) {
-			add_camera(tokens);
 		} else if(tokens[0] == "define") {
 			define(tokens);
 		} else {

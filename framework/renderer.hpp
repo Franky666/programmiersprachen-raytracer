@@ -22,7 +22,7 @@ class Renderer
 	public:
   			Renderer(unsigned w, unsigned h, std::string const& file);
 
-  			void render(Scene const& scene, Camera const& camera);
+  			void render(Scene const& scene, Camera& camera);
   			void write(Pixel const& p);
 
   			inline std::vector<Color> const& colorbuffer() const

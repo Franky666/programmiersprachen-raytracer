@@ -52,10 +52,17 @@ double Sphere::area() const
 }
 
 
-bool Sphere::intersect(Ray const& r, float& t) 
+bool Sphere::intersect(Ray const& r, std::shared_ptr<HitRecord>& hit_record) 
 {
 
-	return glm::intersectRaySphere(r.origin_, glm::normalize(r.direction_), _mp, _r, t);
+
+	bool intersect = glm::intersectRaySphere(r.origin_, glm::normalize(r.direction_), _mp, _r, hit_record->position, hit_record->normal);
+	if (intersect) {
+		hit_record->t = glm::distance(r.origin_, hit_record->position);
+		hit_record->material_ptr = std::make_shared<Material>(_material);
+	}
+
+	return intersect;
 	/*
 	glm::vec3 norm, intersect;
 	

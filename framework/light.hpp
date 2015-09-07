@@ -9,7 +9,7 @@ class Light
 	public:
 			//ctors dtors
 			Light();
-			Light(std::string const& name, glm::vec3 const& position, Color const& ld, Color const& la);
+			Light(std::string const& name, glm::vec3 const& position, Color const& la, Color const& ld);
 
 			//get - methods
 			std::string const& name() const;
